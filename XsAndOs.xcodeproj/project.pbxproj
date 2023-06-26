@@ -18,6 +18,7 @@
 		B4B742BB2A49FD7100E1BC56 /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B742BA2A49FD7100E1BC56 /* GameService.swift */; };
 		B4B742BD2A4A018C00E1BC56 /* GameSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B742BC2A4A018C00E1BC56 /* GameSquare.swift */; };
 		B4B742BF2A4A024E00E1BC56 /* SquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B742BE2A4A024E00E1BC56 /* SquareView.swift */; };
+		B4B742C12A4A0C8900E1BC56 /* YourNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B742C02A4A0C8900E1BC56 /* YourNameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		B4B742BA2A49FD7100E1BC56 /* GameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameService.swift; sourceTree = "<group>"; };
 		B4B742BC2A4A018C00E1BC56 /* GameSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSquare.swift; sourceTree = "<group>"; };
 		B4B742BE2A4A024E00E1BC56 /* SquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareView.swift; sourceTree = "<group>"; };
+		B4B742C02A4A0C8900E1BC56 /* YourNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourNameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				B4B742A12A49EB8400E1BC56 /* AppEntry.swift */,
+				B4B742C02A4A0C8900E1BC56 /* YourNameView.swift */,
 				B4B742A32A49EB8400E1BC56 /* StartView.swift */,
 				B4B742B72A49F41000E1BC56 /* Game Screen */,
 				B4B742B42A49F2A500E1BC56 /* Utilities */,
@@ -183,6 +186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4B742C12A4A0C8900E1BC56 /* YourNameView.swift in Sources */,
 				B4B742A42A49EB8400E1BC56 /* StartView.swift in Sources */,
 				B4B742B32A49EE2D00E1BC56 /* GameModels.swift in Sources */,
 				B4B742A22A49EB8400E1BC56 /* AppEntry.swift in Sources */,
