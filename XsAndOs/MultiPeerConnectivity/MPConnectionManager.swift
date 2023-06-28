@@ -103,7 +103,8 @@ extension MPConnectionManager: MCNearbyServiceBrowserDelegate {
 }
 
 extension MPConnectionManager: MCNearbyServiceAdvertiserDelegate {
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler:
+                    @escaping (Bool, MCSession?) -> Void) {
         DispatchQueue.main.async {
             self.receivedInvite = true
             self.receivedInviteFrom = peerID
@@ -113,26 +114,6 @@ extension MPConnectionManager: MCNearbyServiceAdvertiserDelegate {
 }
 
 extension MPConnectionManager: MCSessionDelegate {
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        if let gameMove = try? JSONDecoder().decode(MPGameMove.self, from: data) {
-            DispatchQueue.main.async {
-                switch gameMove.action {
-                case .start:
-                    break
-                case .move:
-                    if let index = gameMove.index {
-                        self.game?.makeMove(at: index)
-                    }
-                case .reset:
-                    self.game?.reset()
-                case .end:
-                    self.session.disconnect()
-                    self.isAvailableToPlay = true
-                }
-            }
-        }
-    }
-    
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         switch state {
         case .notConnected:
@@ -147,23 +128,46 @@ extension MPConnectionManager: MCSessionDelegate {
             }
         default:
             DispatchQueue.main.async {
-                self.paired = true
-                self.isAvailableToPlay = false
+                self.paired = false
+                self.isAvailableToPlay = true
             }
         }
     }
     
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+    func session(_ session: MCSession, didReceive data: Data, fromPeer PeerID: MCPeerID) {
+        if let gameMove = try? JSONDecoder().decode(MPGameMove.self, from: data) {
+            DispatchQueue.main.async {
+                switch gameMove.action {
+                case .start:
+                    guard let playerName = gameMove.playerName else { return }
+                    if self.game?.player1.name == playerName {
+                        self.game?.player1.isCurrent = true
+                    } else {
+                        self.game?.player2.isCurrent = true
+                    }
+                case .move:
+                    if let index = gameMove.index {
+                        self.game?.makeMove(at: index)
+                    }
+                case .reset:
+                    self.game?.reset()
+                case .end:
+                    self.session.disconnect()
+                    self.isAvailableToPlay = true
+                }
+            }
+        }
+    }
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
         
     }
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-    
+        
     }
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-    
+        
     }
-    
-    
 }
